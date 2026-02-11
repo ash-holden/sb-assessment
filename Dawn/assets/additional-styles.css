@@ -9,7 +9,8 @@
     padding: 20px 30px;
     box-shadow: 0px 10px 10px #ddd;
 
-}details::details-content {
+}
+details::details-content {
     block-size: 0;
     opacity: 0;
     transition: 100ms ease-in-out;

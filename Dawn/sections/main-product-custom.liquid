@@ -682,10 +682,12 @@
               {{- 'icon-arrow.svg' | inline_asset_content -}}
             </a>
           </div>
+
           <details class="content-block product__desc-accordion">
-              <summary><h3>{{ 'products.product.pdp_description_title' | t }}</h3></summary>
-              {{ product.description | replace: '</ul>', '<li><a class="overview__tech-link" href="#tech">More info</a></li></ul>' }}
-            </details>
+            <summary><h3>{{ 'products.product.pdp_description_title' | t }}</h3></summary>
+            {{ product.description | replace: '</ul>', '<li><a class="overview__tech-link" href="#tech">More info</a></li></ul>' }}
+          </details>
+
         </section>
       </div>
     </div>
