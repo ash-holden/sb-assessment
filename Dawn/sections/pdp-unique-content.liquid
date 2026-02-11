@@ -1,0 +1,37 @@
+{% comment %}
+    Expandable section with unique content for each PDP. Update content via product-level custom.unique_content metafield (section will not show if blank)
+{% endcomment %}
+{% if product.metafields.custom.unique_content %}
+
+    <details class="content-block pdp__additional-content page-width">
+        <summary>
+            <h3>{{ section.settings.title }}</h3>
+            <span class="svg-wrapper">
+                {{- 'icon-plus.svg' | inline_asset_content -}}
+            </span>
+        </summary>
+        <div class="pdp-additional-content__inner">
+            {{ product.metafields.custom.unique_content | metafield_tag }}
+        </div>
+    </details>
+
+{% endif %}
+  
+{% schema %}
+    {
+    "name": "Unique Product Content",
+    "settings": [
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Content"
+        }
+    ],
+    "presets": [
+        {
+        "name": "Unique Product Content",
+        "category": "Text"
+        }
+    ]
+    }
+{% endschema %}

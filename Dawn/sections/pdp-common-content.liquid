@@ -1,0 +1,40 @@
+{% comment %}
+    Expandable section with content shared across for all PDPs. Update content via Edit Theme.
+{% endcomment %}
+
+<details class="content-block pdp__additional-content page-width">
+    <summary>
+        <h3>{{ section.settings.title }}</h3>
+        <span class="svg-wrapper">
+            {{- 'icon-plus.svg' | inline_asset_content -}}
+        </span>
+    </summary>
+    <div class="pdp-additional-content__inner">
+        {{ section.settings.inner_content }}
+    </div>
+</details>
+
+  
+{% schema %}
+    {
+    "name": "Common Product Content",
+    "settings": [
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Content"
+        },
+        {
+            "type": "richtext",
+            "id": "inner_content",
+            "label": "Inner Content"
+        }
+    ],
+    "presets": [
+        {
+        "name": "Common Product Content",
+        "category": "Text"
+        }
+    ]
+    }
+{% endschema %}
