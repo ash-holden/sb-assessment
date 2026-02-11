@@ -1,0 +1,97 @@
+{% comment %}
+    A section for the PDP with two related products, specified at product-level via the custom.related_products metafield (max 2 products).
+    If the Related Products metafield contains less than two products, or any of those products are not available to buy, products from the same collection as the current product will be inserted as fallbacks.
+{% endcomment %}
+
+{%- style -%}
+    #RelatedProducts-{{ section.id }} {
+        margin-top: 2em;
+    }
+{%- endstyle -%}
+
+{% assign related_products = product.metafields.custom.related_products.value %}
+{% assign rendered_count = 0 %}
+
+<section id="RelatedProducts-{{ section.id }}" class="section__pdp-related-products">
+    <h3 class="center">{{ 'products.product.pdp_also_bought' | t }}</h3>
+    <div class="pdp-related-products__container">
+
+        {% if related_products != blank %}
+            {% for related_product in related_products %}
+                {% if related_product.available and related_product.id != product.id %}
+                    {% assign variant = related_product.selected_or_first_available_variant %}
+
+                    <div class="content-block pdp-related-product">
+                        <div class="pdp-related-product__img">
+                            <a href="{{ related_product.url }}">
+                                {{ related_product.featured_image | image_url: width: 90 | image_tag }}
+                            </a>
+                        </div>
+                        <div class="pdp-related-product__info">
+                            <h4>{{ related_product.title }}</h4>
+                            <p>{% unless variant.title == 'Default Title' %}{{ variant.title }}{% endunless %}
+                            {% if related_product.compare_at_price > related_product.price %}
+                                <p>
+                                    <span aria-label="Original price {{ related_product.compare_at_price | money }}"><s class="price-item price-item--regular">{{ related_product.compare_at_price | money }}</s></span>
+                                    <span aria-label="Discounted price {{ related_product.price | money }}">{{ related_product.price | money }}</span>
+                                </p>
+                            {% else %}
+                                <p><span aria-label="Price {{ related_product.price | money }}">{{ related_product.price | money }}</span></p>
+                            {% endif %}
+                            
+                        </div>
+                        <div class="pdp-related-product__buy">
+                            <form method="post" action="{{ routes.cart_add_url }}">
+                                <input type="hidden" name="id" value="{{ variant.id }}">
+                                <button type="submit">+</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    {% assign rendered_count = rendered_count | plus: 1 %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        {% if rendered_count < 2 %}
+            {% assign fallback_collection = collection | default: product.collections.first %}
+
+            {% if fallback_collection %}
+                {% for fallback_product in fallback_collection.products %}
+                    {% if fallback_product.available and fallback_product.id != product.id and rendered_count < 2 %}
+                        {% assign variant = fallback_product.selected_or_first_available_variant %}
+
+                        <div class="content-block pdp-related-product">
+                        <div class="pdp-related-product__img">
+                            <a href="{{ fallback_product.url }}">
+                                {{ fallback_product.featured_image | image_url: width: 90 | image_tag }}
+                            </a>
+                        </div>
+                        <div class="pdp-related-product__info">
+                            <h4>{{ fallback_product.title }}</h4>
+                            <p>{% unless variant.title == 'Default Title' %}{{ variant.title }}{% endunless %}
+                            {% if fallback_product.compare_at_price > fallback_product.price %}
+                                <p>
+                                    <span aria-label="Original price {{ fallback_product.compare_at_price | money }}"><s class="price-item price-item--regular">{{ fallback_product.compare_at_price | money }}</s></span>
+                                    <span aria-label="Discounted price {{ fallback_product.price | money }}">{{ fallback_product.price | money }}</span>
+                                </p>
+                            {% else %}
+                                <p><span aria-label="Price {{ fallback_product.price | money }}">{{ fallback_product.price | money }}</span></p>
+                            {% endif %}
+                            
+                        </div>
+                        <div class="pdp-related-product__buy">
+                            <form method="post" action="{{ routes.cart_add_url }}">
+                                <input type="hidden" name="id" value="{{ variant.id }}">
+                                <button type="submit">+</button>
+                            </form>
+                        </div>
+
+                        {% assign rendered_count = rendered_count | plus: 1 %}
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endif %}
+
+    </div>
+</section>
