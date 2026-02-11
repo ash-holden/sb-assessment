@@ -723,8 +723,8 @@
 
     {%- if product.media.size > 0 -%}
       <script src="{{ 'product-modal.js' | asset_url }}" defer="defer"></script>
-      <script src="{{ 'media-gallery.js' | asset_url }}" defer="defer"></script>
-    {%- endif -%}
+      <script src="{{ 'media-gallery-custom.js' | asset_url }}" defer="defer"></script>
+    {%- endif -%} 
 
     {%- if first_3d_model -%}
       <script type="application/json" id="ProductJSON-{{ product.id }}">
@@ -746,6 +746,14 @@
     </script>
   </div>
 </product-info>
+
+<script>
+document.addEventListener('variant:change', function(evt) {
+  const variant = evt.detail.variant;
+  console.log('Variant changed:', variant);
+});
+
+</script>
 
 {% schema %}
 {
