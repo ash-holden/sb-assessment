@@ -46,13 +46,13 @@
   id="MediaGallery-{{ section.id }}"
   role="region"
   {% if section.settings.enable_sticky_info %}
-    class="product__column-sticky"
+    class="product__column-sticky product__image-container"
   {% endif %}
   aria-label="{{ 'products.product.media.gallery_viewer' | t }}"
   data-desktop-layout="{{ section.settings.gallery_layout }}"
 >
   <div id="GalleryStatus-{{ section.id }}" class="visually-hidden" role="status"></div>
-  <slider-component id="GalleryViewer-{{ section.id }}" class="slider-mobile-gutter">
+  <slider-component id="GalleryViewer-{{ section.id }}" class="slider-mobile-gutter product__main-image">
     <a class="skip-to-content-link button visually-hidden quick-add-hidden" href="#ProductInfo-{{ section.id }}">
       {{ 'accessibility.skip_to_product_info' | t }}
     </a>
@@ -183,7 +183,7 @@
   -%}
     <slider-component
       id="GalleryThumbnails-{{ section.id }}"
-      class="thumbnail-slider slider-mobile-gutter quick-add-hidden{% unless section.settings.gallery_layout contains 'thumbnail' %} medium-hide large-up-hide{% endunless %}{% if section.settings.mobile_thumbnails != 'show' %} small-hide{% endif %}{% if media_count <= 3 %} thumbnail-slider--no-slide{% endif %}"
+      class="thumbnail-slider slider-mobile-gutter quick-add-hidden product__image-thumbnails{% unless section.settings.gallery_layout contains 'thumbnail' %} medium-hide large-up-hide{% endunless %}{% if section.settings.mobile_thumbnails != 'show' %} small-hide{% endif %}{% if media_count <= 3 %} thumbnail-slider--no-slide{% endif %}"
     >
       <button
         type="button"
@@ -198,8 +198,8 @@
         </span>
       </button>
       <ul
-        id="Slider-Thumbnails-{{ section.id }}"
-        class="thumbnail-list list-unstyled slider slider--mobile{% if section.settings.gallery_layout == 'thumbnail_slider' %} slider--tablet-up{% endif %}"
+        id="Slider-Thumbnails-{{ section.id }} thumbnail-container"
+        class="list-unstyled slider slider--mobile{% if section.settings.gallery_layout == 'thumbnail_slider' %} slider--tablet-up{% endif %}"
       >
         {%- capture sizes -%}
           (min-width: {{ settings.page_width }}px) calc(({{ settings.page_width | minus: 100 | times: media_width | round }} - 4rem) / 4),

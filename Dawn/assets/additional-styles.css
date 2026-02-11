@@ -91,3 +91,47 @@ summary::marker {
     border: 1px solid #e1e1e1;
     cursor: pointer;
 }
+
+.price__container {
+    font-family: 'Jost';
+    font-size: 1.5em;
+}
+
+@media only screen and (min-width: 750px) {
+    .product__column-sticky.product__image-container {
+        display: grid;
+    }
+    .product--small .product__column-sticky.product__image-container {
+        grid-template-columns: 82px 400px;
+    }
+    .product--medium .product__column-sticky.product__image-container {
+        grid-template-columns: 102px 500px;
+    }
+    .product--large .product__column-sticky.product__image-container {
+        grid-template-columns: 122px 600px;
+    }
+    .product--small .product__image-thumbnails .thumbnail-list {
+        grid-template-columns: 72px;
+    }
+    .product--medium .product__image-thumbnails .thumbnail-list {
+        grid-template-columns: 92px;
+    }
+    .product--large .product__image-thumbnails .thumbnail-list {
+        grid-template-columns: 112px;
+    }
+    .product__main-image {
+        grid-column: 2;
+        grid-row: 1;
+    }
+    .product__image-thumbnails {
+        grid-column: 1;
+        grid-row: 1;
+    }
+}
+
+@media only screen and (max-width: 749px) {
+    .product__image-container {
+        grid-template-columns: repeat(90vw);
+        display: grid;
+    }
+}
