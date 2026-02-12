@@ -2,7 +2,7 @@
     Expandable section with content shared across for all PDPs. Update content via Edit Theme.
 {% endcomment %}
 
-<details class="content-block pdp__additional-content page-width">
+<details {% unless product.metafields.custom.unique_content %}id="tech"{% endunless %} class="content-block pdp__additional-content page-width">
     <summary>
         <h3>{{ section.settings.title }}</h3>
         <span class="svg-wrapper">

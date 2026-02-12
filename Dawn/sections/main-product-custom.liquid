@@ -15,6 +15,7 @@
   {{ 'component-slider.css' | asset_url | stylesheet_tag }}
   {{ 'component-rating.css' | asset_url | stylesheet_tag }}
   {{ 'component-deferred-media.css' | asset_url | stylesheet_tag }}
+  {{ 'additional-styles.css' | asset_url | stylesheet_tag }}
 
   {% unless product.has_only_default_variant %}
     {{ 'component-product-variant-picker.css' | asset_url | stylesheet_tag }}
@@ -74,7 +75,7 @@
 
   {% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
   <div class="page-width">
-    <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
+    <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if product.media.size > 0 %}grid--1-col-tablet{% else %}product--no-media{% endif %}">
       <div class="grid__item product__media-wrapper">
         {% render 'product-media-gallery', variant_images: variant_images %}
       </div>
@@ -682,10 +683,8 @@
               {{- 'icon-arrow.svg' | inline_asset_content -}}
             </a>
           </div>
-          <details class="content-block product__desc-accordion">
-            <summary><h3>{{ 'products.product.pdp_description_title' | t }}</h3></summary>
-            {{ product.description | replace: '</ul>', '<li><a class="overview__tech-link" href="#tech">More info</a></li></ul>' }}
-          </details>
+          
+          {% render 'product-desc-accordion' %}
 
           {% render 'also-bought' %}
 
@@ -746,14 +745,6 @@
     </script>
   </div>
 </product-info>
-
-<script>
-document.addEventListener('variant:change', function(evt) {
-  const variant = evt.detail.variant;
-  console.log('Variant changed:', variant);
-});
-
-</script>
 
 {% schema %}
 {

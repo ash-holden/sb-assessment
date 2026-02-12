@@ -1,0 +1,8 @@
+<details class="content-block product__desc-accordion">
+    <summary><h3>{{ 'products.product.pdp_description_title' | t }}</h3></summary>
+    {% if product.description contains '</ul>' %}
+        {{ product.description | replace_last: '</ul>', '<li><a class="overview__tech-link" href="#tech">More info</a></li></ul>' }}
+    {% else %}
+        {{ product.description | append: '<p><a class="overview__tech-link" href="#tech">More info</a></p>' }}
+    {% endif %}
+</details>

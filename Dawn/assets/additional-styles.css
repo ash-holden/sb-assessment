@@ -1,3 +1,7 @@
+html {
+    scroll-behavior: smooth;
+}
+
 :root {
     interpolate-size: allow-keywords;
 }
@@ -323,7 +327,6 @@ details a:hover:after {
         min-width: 100%;
         aspect-ratio: 16 / 7;
     }
-
 }
 
 @media screen and (min-width: 990px) and (max-width: 1200px) {
