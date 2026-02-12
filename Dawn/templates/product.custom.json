@@ -49,6 +49,53 @@
                 "padding_bottom": 12
             }
         },
+        "mixed_media_banner": {
+            "type": "mixed-media-banner",
+            "blocks": {
+              "banner_one": {
+                "type": "banner",
+                "settings": {
+                  "image": "{{ product.metafields.custom.banner_image_01.value }}",
+                  "layout": "left",
+                  "title": "{{ product.metafields.custom.banner_title_01.value }}",
+                  "heading_tag": "h2",
+                  "text": "{{ product.metafields.custom.banner_text_01.value }}"
+                }
+              },
+              "banner_two": {
+                "type": "banner",
+                "settings": {
+                  "image": "{{ product.metafields.custom.banner_image_02.value }}",
+                  "layout": "background",
+                  "title": "{{ product.metafields.custom.banner_title_02.value }}",
+                  "heading_tag": "h2",
+                  "color": "#fff",
+                  "text": "{{ product.metafields.custom.banner_text_02.value }}"
+                }
+              },
+              "banner_three": {
+                "type": "banner",
+                "settings": {
+                  "image": "{{ product.metafields.custom.banner_image_03.value }}",
+                  "layout": "right",
+                  "title": "{{ product.metafields.custom.banner_title_03.value }}",
+                  "heading_tag": "h2",
+                  "text": "{{ product.metafields.custom.banner_text_03.value }}"
+                }
+              }
+            },
+            "block_order": [
+              "banner_one",
+              "banner_two",
+              "banner_three"
+            ],
+            "name": "Mixed-media banners",
+            "settings": {
+              "color_scheme": "",
+              "padding_top": 36,
+              "padding_bottom": 36
+            }
+        },
         "pdp-unique-content": {
             "type": "pdp-unique-content",
             "settings": { "title":"Info"}
@@ -58,5 +105,5 @@
             "settings": { "title":"FAQ","inner_content": "<h3>Does Magnetic Leather Back provide drop protection?</h3><p>Magnetic Leather Back does not protect against drops, though it does protect the back of your iPhone from scratches.</p><h3>Is it MagSafe and wireless charging compatible?</h3><p>Magnetic Leather Back is fully compatible with all MagSafe and Qi-enabled devices.</p><h3>How do I apply Magnetic Leather Back?</h3><p>To apply, peel the protective films off Magnetic Leather Back’s microsuction patches and press the Back against your iPhone. MagSafe will help snap the Back into place.</p><h3>What is microsuction?</h3><p>Microsuction is a reusable, non-adhesive attachment method. To restore adhesion to the microsuction patches, wipe them off with a damp cloth, let them fully dry, then reinstall.</p><h3>More questions?</h3><p>Get in touch with our team <a href=\"/pages/contact-us\">here</a>.</p>" }
         }
     },
-    "order": ["main", "pdp-unique-content", "pdp-common-content"]
+    "order": ["main", "mixed_media_banner", "pdp-unique-content", "pdp-common-content"]
 }
