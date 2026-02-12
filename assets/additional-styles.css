@@ -266,7 +266,7 @@ details a:hover:after {
     }
 
     .product--large .product__column-sticky.product__image-container {
-        grid-template-columns: 122px 600px;
+        grid-template-columns: auto 1fr;
     }
 
     .product--small .product__image-thumbnails .thumbnail-list {
@@ -289,6 +289,7 @@ details a:hover:after {
     .product__image-thumbnails {
         grid-column: 1;
         grid-row: 1;
+        aspect-ratio: 1 / 6;
     }
 
     .content-block {
