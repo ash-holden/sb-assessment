@@ -235,7 +235,7 @@ details a:hover:after {
 }
 
 .mixed-media-banners__title {
-    word-break: auto-phrase;
+    word-break: inherit;
     line-height: 1em;
     margin: 0 0 2rem;
 }
